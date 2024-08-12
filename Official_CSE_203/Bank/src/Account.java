@@ -34,6 +34,12 @@ public abstract class Account {
     public double getBalance() {
         return balance;
     }
+   
+    public String getPassword() {
+        return password;
+    }
+
+    
 
 
     @Override
@@ -46,6 +52,10 @@ public abstract class Account {
 
     public abstract void transferMoney(Account checkingAccount, double i);
 
+
+
+
+   
 
 
 

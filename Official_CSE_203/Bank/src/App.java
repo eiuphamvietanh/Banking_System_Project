@@ -16,7 +16,7 @@ public class App extends JFrame implements ActionListener {
    private JPasswordField jPasswordField;
    private JTextField idTextField;
    private JLabel idJLabel, passwordJLabel, welcomeBackJLabel, bankNameJLabel, registerJLabel;
-   
+   private User user ;
    private int width = 400;
    private int height = 400;
    private int xLocation = 400;
@@ -33,7 +33,7 @@ public class App extends JFrame implements ActionListener {
         setSize(width, height);
         setLocation(xLocation, yLocation);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-       // changeBackGroundColor();
+        changeBackGroundColor();
         
         setLayout(null);
 
@@ -71,6 +71,7 @@ public class App extends JFrame implements ActionListener {
         jLoginButton.setBounds(160, 140, 200, 25);
         jRegisterButton.setBounds(160, 170, 200, 25);
 
+        jLoginButton.addActionListener(this);
         
         
 
@@ -84,12 +85,30 @@ public class App extends JFrame implements ActionListener {
             Color pastelBlue = new Color(176, 212, 184);
             contentPane.setBackground(pastelBlue);
         }
+
+        @Override
+    public void actionPerformed(ActionEvent event) {
+        if(event.getSource() == jLoginButton){
+            String id = idTextField.getText();
+            String password = new String(jPasswordField.getPassword());
+            user = new User();
+            if (user.containsAccount(id, password)) {
+                System.out.println("Succesful");
+                
+            }else {
+                System.out.println("Fale");
+            }
+        } else if (event.getSource()==jRegisterButton){
+
+        }
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
     
 
 
 
     public static void main(String[] args) throws Exception {
-        new App();
+        
         
         User user = new User("84564", "Viet Anh", "65464");
         Bank banks = new Bank();
@@ -107,6 +126,7 @@ public class App extends JFrame implements ActionListener {
         checkingAccount1.transferMoney(checkingAccount, 500);
         System.out.println(checkingAccount.toString());
         System.out.println(checkingAccount1.toString());
+        new App();
         
         
 
@@ -121,9 +141,5 @@ public class App extends JFrame implements ActionListener {
 
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-    }
+    
 }
